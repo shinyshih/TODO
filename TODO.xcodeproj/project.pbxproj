@@ -8,20 +8,24 @@
 
 /* Begin PBXBuildFile section */
 		77B447A220D35D08008C2922 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77B447A120D35D08008C2922 /* AppDelegate.swift */; };
-		77B447A420D35D08008C2922 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77B447A320D35D08008C2922 /* ViewController.swift */; };
 		77B447A720D35D08008C2922 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 77B447A520D35D08008C2922 /* Main.storyboard */; };
 		77B447A920D35D0B008C2922 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 77B447A820D35D0B008C2922 /* Assets.xcassets */; };
 		77B447AC20D35D0B008C2922 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 77B447AA20D35D0B008C2922 /* LaunchScreen.storyboard */; };
+		77B447B420D35E2E008C2922 /* ListTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77B447B320D35E2E008C2922 /* ListTableViewController.swift */; };
+		77B447B820D35EAB008C2922 /* CheckListItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77B447B720D35EAB008C2922 /* CheckListItem.swift */; };
+		77B447BA20D3C2A9008C2922 /* CreateEventViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77B447B920D3C2A9008C2922 /* CreateEventViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		77B4479E20D35D08008C2922 /* TODO.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TODO.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		77B447A120D35D08008C2922 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		77B447A320D35D08008C2922 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		77B447A620D35D08008C2922 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		77B447A820D35D0B008C2922 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		77B447AB20D35D0B008C2922 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		77B447AD20D35D0B008C2922 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		77B447B320D35E2E008C2922 /* ListTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListTableViewController.swift; sourceTree = "<group>"; };
+		77B447B720D35EAB008C2922 /* CheckListItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckListItem.swift; sourceTree = "<group>"; };
+		77B447B920D3C2A9008C2922 /* CreateEventViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateEventViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -55,8 +59,10 @@
 			isa = PBXGroup;
 			children = (
 				77B447A120D35D08008C2922 /* AppDelegate.swift */,
-				77B447A320D35D08008C2922 /* ViewController.swift */,
 				77B447A520D35D08008C2922 /* Main.storyboard */,
+				77B447B320D35E2E008C2922 /* ListTableViewController.swift */,
+				77B447B920D3C2A9008C2922 /* CreateEventViewController.swift */,
+				77B447B720D35EAB008C2922 /* CheckListItem.swift */,
 				77B447A820D35D0B008C2922 /* Assets.xcassets */,
 				77B447AA20D35D0B008C2922 /* LaunchScreen.storyboard */,
 				77B447AD20D35D0B008C2922 /* Info.plist */,
@@ -135,7 +141,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				77B447A420D35D08008C2922 /* ViewController.swift in Sources */,
+				77B447B820D35EAB008C2922 /* CheckListItem.swift in Sources */,
+				77B447BA20D3C2A9008C2922 /* CreateEventViewController.swift in Sources */,
+				77B447B420D35E2E008C2922 /* ListTableViewController.swift in Sources */,
 				77B447A220D35D08008C2922 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -283,6 +291,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = W9X56337HD;
 				INFOPLIST_FILE = TODO/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -301,6 +310,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = W9X56337HD;
 				INFOPLIST_FILE = TODO/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
