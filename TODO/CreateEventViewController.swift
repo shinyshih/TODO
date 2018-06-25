@@ -11,29 +11,43 @@ import UIKit
 protocol CreateEventViewControllerDelegate: class {
     func createEventViewControllerDidCancel(_ controller: CreateEventViewController)
     func createEventViewController(_ controller: CreateEventViewController, didFinishAdding item: CheckListItem)
+    func createEventViewController(_ controller: CreateEventViewController, didFinishEditing item: CheckListItem)
 }
 
 class CreateEventViewController: UIViewController {
 
     @IBOutlet weak var addItemTextField: UITextField!
     @IBOutlet weak var doneButton: UIBarButtonItem!
+    weak var delegate: CreateEventViewControllerDelegate?
+    var itemToEdit: CheckListItem?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        if let item = itemToEdit {
+            title = ""
+            addItemTextField.text = item.itemName
+        }
         
         updateUploadButtonState()
         
     }
     
-    var listTableViewController: ListTableViewController?
-    
     @IBAction func doneButtonPressed(_ sender: Any) {
-        var item = CheckListItem()
-        item.itemName = addItemTextField.text
-        listTableViewController?.createEventViewController(self, didFinishAdding: item)
+        if let itemToEdit = itemToEdit {
+            itemToEdit.itemName = addItemTextField.text!
+            delegate?.createEventViewController(self, didFinishEditing: itemToEdit)
+        } else {
+            let item = CheckListItem()
+            item.itemName = addItemTextField.text
+            item.checked = false
+            delegate?.createEventViewController(self, didFinishAdding: item)
+        }
+        
     }
     
     @IBAction func cancelButtonPressed(_ sender: Any) {
-        listTableViewController?.createEventViewControllerDidCancel(self)
+        delegate?.createEventViewControllerDidCancel(self)
     }
     
     @IBAction func textChanged(_ sender: UITextField) {

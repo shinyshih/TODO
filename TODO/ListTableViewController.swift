@@ -17,18 +17,28 @@ class ListTableViewController: UITableViewController, UIImagePickerControllerDel
     
     func createEventViewController(_ controller: CreateEventViewController, didFinishAdding item: CheckListItem) {
         controller.navigationController?.popViewController(animated: true)
+        listItems.append(item)
+        CheckListItem.saveToFile(items: listItems)
+        tableView.reloadData()
+        
     }
     
-
+    func createEventViewController(_ controller: CreateEventViewController, didFinishEditing item: CheckListItem) {
+        controller.navigationController?.popViewController(animated: true)
+        
+        let indexPath = IndexPath(row: selectedRow!, section: 0)
+        if let cell = tableView.cellForRow(at: indexPath) {
+            configureText(for: cell, with: item)
+        }
+        CheckListItem.saveToFile(items: listItems)
+        tableView.reloadData()
+        
+    }
+    
     var listItems = [CheckListItem]()
     var selectedImageFromPicker: UIImage?
 
     @IBOutlet weak var changeImageButton: UIBarButtonItem!
-    func add(item: CheckListItem) {
-        listItems.append(item)
-        CheckListItem.saveToFile(items: listItems)
-        tableView.reloadData()
-    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -39,22 +49,31 @@ class ListTableViewController: UITableViewController, UIImagePickerControllerDel
         } else {
             self.tableView.backgroundView = UIImageView(image: selectedImageFromPicker)
         }
-        
-
         self.tableView.backgroundView?.alpha = 0.5
         self.navigationController?.navigationBar.setBackgroundImage(UIImage(), for: .default)
         self.navigationController?.navigationBar.shadowImage = UIImage()
         
-        
-        
         if let items = CheckListItem.readItemsFromFile() {
             listItems = items
         }
+        
     }
 
-    // CHECKMARK TOGGLE
-    func checkMarkState(cell: UITableViewCell, with item: CheckListItem) {
+    // CONFIGURE CHECKMARK & TEXT
+    func configureCheckmark(for cell: UITableViewCell,
+                            with item: CheckListItem) {
+        let checkLabel = cell.viewWithTag(1001) as? UILabel
         
+        if item.checked {
+            checkLabel!.text = "✔️"
+        } else {
+            checkLabel!.text = ""
+        }
+    }
+    
+    func configureText(for cell: UITableViewCell, with item: CheckListItem){
+        let label = cell.viewWithTag(1000) as? UILabel
+        label?.text = item.itemName
     }
     
     // BACKGROUND IMAGE CHANGE
@@ -80,11 +99,7 @@ class ListTableViewController: UITableViewController, UIImagePickerControllerDel
     
     // MARK: - Table view data source
 
-    override func numberOfSections(in tableView: UITableView) -> Int {
-        // #warning Incomplete implementation, return the number of sections
-        return 1
-    }
-
+    
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
         return listItems.count
@@ -92,59 +107,53 @@ class ListTableViewController: UITableViewController, UIImagePickerControllerDel
 
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "itemCell", for: indexPath)
+        let cell = tableView.dequeueReusableCell(withIdentifier: "itemCell", for: indexPath) as? ItemTableViewCell
 
         let item = listItems[indexPath.row]
-        cell.textLabel?.text = item.itemName
-
-        return cell
+        cell?.itemLabel.text = item.itemName
+        configureText(for: cell!, with: item)
+        configureCheckmark(for: cell!, with: item)
+        // edit 不會出現值，但toggle過之後會有值，再按一次又沒有值
+        return cell!
     }
     
-
-    /*
-    // Override to support conditional editing of the table view.
-    override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
-        // Return false if you do not want the specified item to be editable.
-        return true
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        if let cell = tableView.cellForRow(at: indexPath) {
+            let item = listItems[indexPath.row]
+            item.toggle()
+            configureCheckmark(for: cell, with: item)
+        }
     }
-    */
-
-    /*
+    
+   
+    
     // Override to support editing the table view.
     override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
             // Delete the row from the data source
-            tableView.deleteRows(at: [indexPath], with: .fade)
             listItems.remove(at: indexPath.row)
-        } else if editingStyle == .insert {
-            // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-        }    
-    }
-    */
-
-    /*
-    // Override to support rearranging the table view.
-    override func tableView(_ tableView: UITableView, moveRowAt fromIndexPath: IndexPath, to: IndexPath) {
+            tableView.deleteRows(at: [indexPath], with: .fade)
+        }
+        CheckListItem.saveToFile(items: listItems)
 
     }
-    */
-
-    /*
-    // Override to support conditional rearranging of the table view.
-    override func tableView(_ tableView: UITableView, canMoveRowAt indexPath: IndexPath) -> Bool {
-        // Return false if you do not want the item to be re-orderable.
-        return true
-    }
-    */
-
+    
+    var selectedRow: Int?
     
     // MARK: - Navigation
 
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        
+
         let controller = segue.destination as? CreateEventViewController
-        controller?.listTableViewController = self
+        controller?.delegate = self
+        if segue.identifier == "editSegue" {
+            if let indexPath = tableView.indexPath(for: sender as! UITableViewCell) {
+                controller?.itemToEdit = listItems[indexPath.row]
+                selectedRow = indexPath.row
+                print(controller?.itemToEdit )
+            }
+        }
     }
     
 

@@ -23,6 +23,8 @@ class CheckListItem: Codable {
         if let data = try? propertyEncoder.encode(items) {
             let url = CheckListItem.documentsDirectory?.appendingPathComponent("item")
             try? data.write(to: url!)
+            
+            
         }
     }
     

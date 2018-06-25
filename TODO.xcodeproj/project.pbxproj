@@ -14,6 +14,7 @@
 		77B447B420D35E2E008C2922 /* ListTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77B447B320D35E2E008C2922 /* ListTableViewController.swift */; };
 		77B447B820D35EAB008C2922 /* CheckListItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77B447B720D35EAB008C2922 /* CheckListItem.swift */; };
 		77B447BA20D3C2A9008C2922 /* CreateEventViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77B447B920D3C2A9008C2922 /* CreateEventViewController.swift */; };
+		77B447BC20D9F3B2008C2922 /* ItemTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77B447BB20D9F3B2008C2922 /* ItemTableViewCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -26,6 +27,7 @@
 		77B447B320D35E2E008C2922 /* ListTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListTableViewController.swift; sourceTree = "<group>"; };
 		77B447B720D35EAB008C2922 /* CheckListItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckListItem.swift; sourceTree = "<group>"; };
 		77B447B920D3C2A9008C2922 /* CreateEventViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateEventViewController.swift; sourceTree = "<group>"; };
+		77B447BB20D9F3B2008C2922 /* ItemTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemTableViewCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -60,6 +62,7 @@
 			children = (
 				77B447A120D35D08008C2922 /* AppDelegate.swift */,
 				77B447A520D35D08008C2922 /* Main.storyboard */,
+				77B447BB20D9F3B2008C2922 /* ItemTableViewCell.swift */,
 				77B447B320D35E2E008C2922 /* ListTableViewController.swift */,
 				77B447B920D3C2A9008C2922 /* CreateEventViewController.swift */,
 				77B447B720D35EAB008C2922 /* CheckListItem.swift */,
@@ -143,6 +146,7 @@
 			files = (
 				77B447B820D35EAB008C2922 /* CheckListItem.swift in Sources */,
 				77B447BA20D3C2A9008C2922 /* CreateEventViewController.swift in Sources */,
+				77B447BC20D9F3B2008C2922 /* ItemTableViewCell.swift in Sources */,
 				77B447B420D35E2E008C2922 /* ListTableViewController.swift in Sources */,
 				77B447A220D35D08008C2922 /* AppDelegate.swift in Sources */,
 			);
