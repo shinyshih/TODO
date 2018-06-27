@@ -30,10 +30,11 @@ class ListTableViewController: UITableViewController, UIImagePickerControllerDel
         if let cell = tableView.cellForRow(at: indexPath) {
             configureText(for: cell, with: item)
         }
+        
         CheckListItem.saveToFile(items: listItems)
         tableView.reloadData()
-        
     }
+    
     
     var listItems = [CheckListItem]()
     var selectedImageFromPicker: UIImage?
@@ -42,7 +43,7 @@ class ListTableViewController: UITableViewController, UIImagePickerControllerDel
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        print(CheckListItem.documentsDirectory)
         //imagepicker 的東西還沒有savetofile
         if selectedImageFromPicker == nil {
             self.tableView.backgroundView = UIImageView(image: UIImage(named: "background"))
@@ -59,7 +60,7 @@ class ListTableViewController: UITableViewController, UIImagePickerControllerDel
         
     }
 
-    // CONFIGURE CHECKMARK & TEXT
+    // Configure CHECKMARK & TEXT
     func configureCheckmark(for cell: UITableViewCell,
                             with item: CheckListItem) {
         let checkLabel = cell.viewWithTag(1001) as? UILabel
@@ -113,7 +114,6 @@ class ListTableViewController: UITableViewController, UIImagePickerControllerDel
         cell?.itemLabel.text = item.itemName
         configureText(for: cell!, with: item)
         configureCheckmark(for: cell!, with: item)
-        // edit 不會出現值，但toggle過之後會有值，再按一次又沒有值
         return cell!
     }
     
@@ -154,6 +154,7 @@ class ListTableViewController: UITableViewController, UIImagePickerControllerDel
                 print(controller?.itemToEdit )
             }
         }
+        
     }
     
 
